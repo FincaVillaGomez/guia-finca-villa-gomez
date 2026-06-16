@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía de Finca Villa Gómez</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#E0F7FA;display:flex;justify-content:center;min-height:100vh;padding:0}
+  .g-root{font-family:'Nunito',sans-serif;background:#F0FBFC;max-width:680px;width:100%;color:#1A3A40;min-height:100vh}
+  .g-hero{background:#0E7490;padding:2.5rem 2rem 2rem;text-align:center}
+  .g-hero-emoji{font-size:48px;display:block;margin-bottom:0.5rem}
+  .g-hero-eyebrow{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#A5F3FC;font-weight:700;margin-bottom:0.5rem}
+  .g-hero-title{font-family:'Playfair Display',serif;font-size:30px;color:#fff;margin:0 0 0.4rem;line-height:1.2}
+  .g-hero-sub{font-size:13px;color:#BAE6FD;margin:0}
+  .g-hero-wave{display:block;width:100%;margin-bottom:-2px}
+  .g-nav{display:flex;overflow-x:auto;background:#fff;border-bottom:2px solid #E0F7FA;padding:0 0.5rem;gap:0;position:sticky;top:0;z-index:10}
+  .g-nav::-webkit-scrollbar{display:none}
+  .g-nav button{background:none;border:none;border-bottom:3px solid transparent;color:#5B8A8E;padding:12px 14px;font-size:12px;font-family:'Nunito',sans-serif;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.18s;margin-bottom:-2px}
+  .g-nav button:hover{color:#0E7490}
+  .g-nav button.active{color:#0E7490;border-bottom:3px solid #0E7490}
+  .g-body{padding:1.5rem}
+  .g-sec{display:none}
+  .g-sec.on{display:block}
+  .g-sec-head{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:#0E7490;margin:0 0 1rem;display:flex;align-items:center;gap:8px}
+  .g-card{background:#fff;border-radius:14px;padding:1.1rem 1.25rem;margin-bottom:0.875rem;border:1.5px solid #E0F7FA;position:relative;overflow:hidden}
+  .g-card::before{content:'';position:absolute;top:0;left:0;width:5px;height:100%;background:#0E7490}
+  .g-card.coral::before{background:#F97316}
+  .g-card.teal::before{background:#14B8A6}
+  .g-card.amber::before{background:#F59E0B}
+  .g-card.purple::before{background:#8B5CF6}
+  .g-card-name{font-size:15px;font-weight:800;color:#0C4A6E;margin:0 0 0.25rem}
+  .g-tag{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;padding:3px 9px;border-radius:20px;margin-bottom:0.4rem}
+  .g-tag.turquesa{background:#CFFAFE;color:#0E7490}
+  .g-tag.naranja{background:#FEF3C7;color:#B45309}
+  .g-tag.verde{background:#DCFCE7;color:#166534}
+  .g-tag.lila{background:#EDE9FE;color:#5B21B6}
+  .g-tag.rosa{background:#FCE7F3;color:#9D174D}
+  .g-card p{font-size:13px;color:#3D6B70;line-height:1.65;margin:0.25rem 0 0}
+  .g-tip{background:#FFF7ED;border-radius:8px;padding:7px 10px;font-size:12px;color:#92400E;margin-top:0.5rem}
+  .g-link{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:#0E7490;text-decoration:none;margin-top:0.5rem;border:1.5px solid #BAE6FD;border-radius:8px;padding:4px 10px;background:#F0FBFC}
+  .g-link.naranja{color:#B45309;border-color:#FDE68A;background:#FFFBEB}
+  .g-link.ig{color:#9D174D;border-color:#FBCFE8;background:#FDF2F8}
+  .g-link-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:0.6rem}
+  .g-welcome{background:linear-gradient(135deg,#0E7490 0%,#0891B2 60%,#14B8A6 100%);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;color:white}
+  .g-welcome-title{font-family:'Playfair Display',serif;font-size:20px;color:#fff;margin:0 0 0.5rem}
+  .g-welcome p{font-size:13px;color:#BAE6FD;margin:0;line-height:1.7}
+  .g-pills{display:flex;flex-wrap:wrap;gap:7px;margin:1rem 0}
+  .g-pill{background:#fff;border:1.5px solid #BAE6FD;color:#0E7490;font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px}
+  .g-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #E0F7FA}
+  .g-row-icon{font-size:18px;min-width:28px;text-align:center}
+  .g-row-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;color:#5B8A8E}
+  .g-row-val{font-size:13px;font-weight:600;color:#0C4A6E}
+  .g-cta{display:block;background:#0E7490;color:#fff;text-align:center;padding:12px 20px;border-radius:12px;font-weight:800;font-size:14px;text-decoration:none;margin-top:1.25rem}
+  .g-em-card{background:#FFF5F5;border:1.5px solid #FECACA;border-radius:12px;padding:1rem 1.25rem;margin-bottom:0.875rem}
+  .g-em-name{font-size:14px;font-weight:800;color:#991B1B;margin:0 0 0.25rem}
+  .g-em-card p{font-size:13px;color:#7F1D1D;margin:0}
+  .g-em-num{font-size:26px;font-weight:800;color:#991B1B}
+  .g-em-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:1rem}
+  .g-em-pill{background:#FEE2E2;border-radius:10px;padding:0.75rem;text-align:center}
+  .g-pol-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #FECACA;font-size:13px}
+  .g-pol-name{color:#7F1D1D;font-weight:600}
+  .g-pol-num{color:#991B1B;font-weight:800}
+  .g-footer{background:#0C4A6E;color:#BAE6FD;text-align:center;padding:1.25rem;font-size:12px;font-weight:600;line-height:1.8}
+  .g-footer a{color:#7DD3FC;text-decoration:none}
+  .g-contact-green{background:#ECFDF5;border:1.5px solid #A7F3D0;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.25rem}
+</style>
+</head>
+<body>
+<div class="g-root">
+  <div class="g-hero">
+    <span class="g-hero-emoji">🌴</span>
+    <div class="g-hero-eyebrow">La Unión · Valle del Cauca</div>
+    <div class="g-hero-title">Guía de Finca Villa Gómez</div>
+    <div class="g-hero-sub">Todo lo que necesitas saber para vivir el norte del Valle</div>
+    <svg class="g-hero-wave" viewBox="0 0 680 32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,16 C170,32 510,0 680,16 L680,32 L0,32 Z" fill="#F0FBFC"/></svg>
+  </div>
+
+  <div class="g-nav" role="tablist">
+    <button class="active" onclick="gTab('inicio',this)">🏠 Inicio</button>
+    <button onclick="gTab('lugares',this)">🗺️ Lugares</button>
+    <button onclick="gTab('gastro',this)">🍽️ Gastronomía</button>
+    <button onclick="gTab('aventura',this)">🪂 Aventura</button>
+    <button onclick="gTab('compras',this)">🛒 Compras</button>
+    <button onclick="gTab('emergencias',this)">🚑 Emergencias</button>
+  </div>
+
+  <div class="g-body">
+
+    <div id="s-inicio" class="g-sec on">
+      <div class="g-welcome">
+        <div class="g-welcome-title">¡Bienvenidos a su casa! 🎉</div>
+        <p>Nos alegra mucho tenerlos aquí. Esta guía fue hecha con cariño para que descubran todo lo que el norte del Valle del Cauca tiene para ofrecer. Cualquier duda, estamos a un mensaje.</p>
+      </div>
+      <div class="g-sec-head">📍 La finca</div>
+      <div class="g-row"><div class="g-row-icon">📍</div><div><div class="g-row-label">Dirección</div><div class="g-row-val">Vía Panorama, Toro, Valle del Cauca</div></div></div>
+      <div class="g-row"><div class="g-row-icon">🏙️</div><div><div class="g-row-label">A cuánto estamos</div><div class="g-row-val">2 min de Toro · 8 min de La Unión</div></div></div>
+      <div class="g-row"><div class="g-row-icon">🚗</div><div><div class="g-row-label">Acceso</div><div class="g-row-val">Vía 100% pavimentada, todo tipo de vehículo</div></div></div>
+      <div class="g-row"><div class="g-row-icon">📞</div><div><div class="g-row-label">Contacto</div><div class="g-row-val">311 388 7061 · Llamadas y WhatsApp</div></div></div>
+      <div class="g-row"><div class="g-row-icon">🛵</div><div><div class="g-row-label">Domicilios</div><div class="g-row-val">Supermercado Eliceo · 321 730 0969 · 311 348 0595</div></div></div>
+      <div class="g-sec-head" style="margin-top:1.5rem">✨ Lo que tienen disponible</div>
+      <div class="g-pills">
+        <span class="g-pill">🏊 Piscina con cascada</span><span class="g-pill">🍖 Estación BBQ</span><span class="g-pill">🔊 JBL PartyBox</span><span class="g-pill">🎮 Sala de juegos</span><span class="g-pill">🏕️ Zona camping</span><span class="g-pill">🐾 Pet-friendly</span><span class="g-pill">🚗 Parqueadero</span><span class="g-pill">📶 Wi-Fi</span><span class="g-pill">🔥 Fogata</span>
+      </div>
+      <a class="g-cta" href="https://linktr.ee/FincaVillaGomez" target="_blank">Todos nuestros links → linktr.ee/FincaVillaGomez</a>
+    </div>
+
+    <div id="s-lugares" class="g-sec">
+      <div class="g-sec-head">🗺️ Lugares de interés</div>
+      <div class="g-card">
+        <span class="g-tag turquesa">⭐ Imperdible</span>
+        <div class="g-card-name">Parque Nacional de la Uva y el Vino</div>
+        <p>El atractivo más emblemático de La Unión. Viñedos, zoológico, jardín zen, museo de la vid y degustación de vinos Casa Grajales. Ideal para medio día en familia.</p>
+        <div class="g-tip">💡 Verificar tarifas y horarios en parquenacionaldelauva.com o al 320 632 1021 antes de ir.</div>
+      </div>
+      <div class="g-card teal">
+        <span class="g-tag verde">Cultural</span>
+        <div class="g-card-name">Parque Principal Argemiro Escobar — La Unión</div>
+        <p>El corazón del municipio. Arquitectura colonial, iglesia principal y el mejor lugar para probar un auténtico cholado vallecaucano con frutas frescas de la zona.</p>
+      </div>
+      <div class="g-card amber">
+        <span class="g-tag naranja">Historia · 1610</span>
+        <div class="g-card-name">Capilla Doctrinera San Juan Bautista — Toro</div>
+        <p>Monumento nacional construido en 1610 a orillas del río Cauca. Conserva nichos de madera, ornamentos, púlpito, misales en latín e imágenes originales. Uno de los restos arquitectónicos coloniales más antiguos del norte del Valle.</p>
+      </div>
+      <div class="g-card teal">
+        <span class="g-tag verde">Panorámica</span>
+        <div class="g-card-name">Cerro de la Cruz — Toro</div>
+        <p>Referente espiritual y lugar de peregrinación. Vista panorámica privilegiada del territorio desde las alturas del municipio.</p>
+      </div>
+      <div class="g-card">
+        <span class="g-tag turquesa">Hotel · Restaurante</span>
+        <div class="g-card-name">Hotel Los Viñedos — La Unión</div>
+        <p>La mejor vista panorámica de La Unión y el Valle. Dos restaurantes de alto nivel para una cena especial o almuerzo memorable.</p>
+        <div class="g-link-row"><a class="g-link" href="https://maps.app.goo.gl/tyVcon4tGZ6hJ5oZ9" target="_blank">📍 Ver en Google Maps</a></div>
+      </div>
+    </div>
+
+    <div id="s-gastro" class="g-sec">
+      <div class="g-sec-head">🍽️ Gastronomía local</div>
+      <div class="g-card coral">
+        <span class="g-tag naranja">🌅 Vista panorámica</span>
+        <div class="g-card-name">Rosalia's Garden</div>
+        <p>Espacio gastronómico con una de las mejores vistas de la región. Ambiente moderno y acogedor. Perfecto para el atardecer.</p>
+        <div class="g-tip">💡 Para grupos grandes, reservar con anticipación.</div>
+        <div class="g-link-row">
+          <a class="g-link naranja" href="https://maps.app.goo.gl/NeAmMvjmeptovrie8" target="_blank">📍 Google Maps</a>
+          <a class="g-link naranja" href="tel:+573206174808">📞 320 617 4808</a>
+          <a class="g-link ig" href="https://www.instagram.com/rosaliasgarden?igsh=MTZ6OTdyOWYyM2h2NA==" target="_blank">📲 @rosaliasgarden</a>
+        </div>
+      </div>
+      <div class="g-card coral">
+        <span class="g-tag naranja">🍷 Restaurante premium</span>
+        <div class="g-card-name">Hotel Los Viñedos — Trattoria & La Viña</div>
+        <p>La mejor vista panorámica de La Unión y el Valle. Dos restaurantes de alto nivel para una cena especial o almuerzo memorable.</p>
+        <div class="g-link-row"><a class="g-link naranja" href="https://maps.app.goo.gl/tyVcon4tGZ6hJ5oZ9" target="_blank">📍 Google Maps</a></div>
+      </div>
+      <div class="g-card coral">
+        <span class="g-tag rosa">☕ Café · Restaurante</span>
+        <div class="g-card-name">Rosé Café-Restaurante</div>
+        <p>Café-restaurante local con ambiente acogedor en La Unión. Ideal para desayunos, almuerzos o un café de tarde.</p>
+        <div class="g-link-row"><a class="g-link ig" href="https://www.instagram.com/roselaunionvalle?igsh=Y3B0d29meHBjdXh5" target="_blank">📲 @roselaunionvalle</a></div>
+      </div>
+      <div class="g-card coral">
+        <span class="g-tag naranja">🍔 Comida</span>
+        <div class="g-card-name">Yo Soy Mister</div>
+        <p>Restaurante local en La Unión. Buena opción para un plan casual con el grupo.</p>
+        <div class="g-link-row"><a class="g-link ig" href="https://www.instagram.com/yosoymisterlaunion?igsh=MTFyM3MyeGxqNDBzdw==" target="_blank">📲 @yosoymisterlaunion</a></div>
+      </div>
+      <div class="g-card coral">
+        <span class="g-tag turquesa">🦞 Comida de mar</span>
+        <div class="g-card-name">AltaMar</div>
+        <p>Restaurante especializado en comida de mar en La Unión. Para los amantes del pescado y los mariscos.</p>
+        <div class="g-link-row"><a class="g-link ig" href="https://www.instagram.com/altamar_la_union?igsh=MTB4MnBycXJxbDhtYw==" target="_blank">📲 @altamar_la_union</a></div>
+      </div>
+      <div class="g-card amber">
+        <span class="g-tag naranja">🥩 Lechonería</span>
+        <div class="g-card-name">Lechonería Aquí es Raúl</div>
+        <p>Lechonería tradicional en La Unión. La opción ideal para los amantes de la lechona vallecaucana.</p>
+        <div class="g-link-row"><a class="g-link naranja" href="https://maps.app.goo.gl/HD24iW2kjt2HJ4mU6" target="_blank">📍 Google Maps</a></div>
+      </div>
+      <div class="g-card amber">
+        <span class="g-tag naranja">🍲 Cocina valluna</span>
+        <div class="g-card-name">La Sazón Valluna</div>
+        <p>Restaurante de cocina vallecaucana tradicional. Ideal para disfrutar de los sabores auténticos de la región.</p>
+        <div class="g-link-row">
+          <a class="g-link naranja" href="https://maps.app.goo.gl/LCo5nWn36JpMtWRb9" target="_blank">📍 Google Maps</a>
+          <a class="g-link naranja" href="tel:+573135484659">📞 313 548 4659</a>
+        </div>
+      </div>
+      <div class="g-card amber">
+        <span class="g-tag naranja">☕ Tradición</span>
+        <div class="g-card-name">San Luis — El pandeyuca de la región</div>
+        <p>Parada obligatoria para el desayuno o el algo. El pandeyuca más auténtico del norte del Valle.</p>
+        <div class="g-link-row"><a class="g-link naranja" href="https://maps.app.goo.gl/Ej1kp7xVb9SgmZTV8" target="_blank">📍 Google Maps</a></div>
+      </div>
+      <div class="g-card amber">
+        <span class="g-tag naranja">🥤 Bebida típica</span>
+        <div class="g-card-name">El Punto del Trabuco Don Alonso</div>
+        <p>El hogar del trabuco original: bebida tradicional y energética, parte del patrimonio gastronómico local.</p>
+        <div class="g-link-row"><a class="g-link naranja" href="https://maps.app.goo.gl/EFaseSgQ5wxBKg5X6" target="_blank">📍 Google Maps</a></div>
+      </div>
+      <div class="g-card coral">
+        <span class="g-tag rosa">🍩 Tradición — Versalles</span>
+        <div class="g-card-name">Panadería La Central — Buñuelos con cintura</div>
+        <p>Los famosos buñuelos con cintura, tradicionales de Versalles, Valle del Cauca. Parada obligatoria si hacen el recorrido hacia ese municipio.</p>
+        <div class="g-link-row"><a class="g-link naranja" href="https://maps.app.goo.gl/pGRDgzjtNi8UZJa4A" target="_blank">📍 Google Maps</a></div>
+      </div>
+      <div class="g-card" style="border-left-color:#14B8A6">
+        <span class="g-tag verde">🍴 Para probar sí o sí</span>
+        <div class="g-card-name">Sabores del Valle que no pueden irse sin probar</div>
+        <p>Sancocho de gallina · Tamal valluno · Cholado vallecaucano · Aborrajado · Pandebono · Marranitas · Arequipe de uva · Champús · Guarapo · Lulada.</p>
+      </div>
+    </div>
+
+    <div id="s-aventura" class="g-sec">
+      <div class="g-sec-head">🪂 Aventura</div>
+      <div class="g-card">
+        <span class="g-tag lila">🪂 Deporte extremo</span>
+        <div class="g-card-name">Parapente La Unión</div>
+        <p>La Unión es uno de los epicentros del parapentismo en Colombia. Topografía y clima ideales para volar con vista al Valle del Cauca.</p>
+        <div class="g-tip">💡 Consulta disponibilidad y reservas directamente con el operador.</div>
+        <div class="g-link-row"><a class="g-link ig" href="https://www.instagram.com/parapentelaunion?igsh=MWM3Y2pjcDBlczBmaA==" target="_blank">📲 @parapentelaunion</a></div>
+      </div>
+    </div>
+
+    <div id="s-compras" class="g-sec">
+      <div class="g-sec-head">🛒 Compras y abastecimiento</div>
+      <div class="g-card" style="background:#F0FBFC">
+        <span class="g-tag turquesa">🛵 Domicilio a la finca</span>
+        <div class="g-card-name">Supermercado Eliceo</div>
+        <p>Domicilios directamente a la puerta de la villa. La opción más cómoda para abastecerse sin salir.</p>
+        <div class="g-link-row">
+          <a class="g-link" href="https://maps.app.goo.gl/jiWruhmGeDCrEmBAA" target="_blank">📍 Google Maps</a>
+          <a class="g-link" href="tel:+573217300969">📞 321 730 0969</a>
+          <a class="g-link" href="tel:+573113480595">📞 311 348 0595</a>
+        </div>
+      </div>
+      <div class="g-card coral">
+        <span class="g-tag naranja">🍷 Productos regionales</span>
+        <div class="g-card-name">Casa Grajales — Vinos y productos de la uva</div>
+        <p>La empresa vitícola más reconocida de la región. Vinos, arequipe de uva y productos artesanales. Un recuerdo perfecto para llevar.</p>
+        <div class="g-link-row"><a class="g-link naranja" href="https://maps.app.goo.gl/gWxyWqnPcVXnegJE8" target="_blank">📍 Google Maps</a></div>
+      </div>
+      <div class="g-card teal">
+        <span class="g-tag verde">🛍️ En La Unión</span>
+        <div class="g-card-name">Centros comerciales y tiendas</div>
+        <p>Centro Comercial La Viña · Centro Comercial La 15 · Casa Detalles (artesanías y regalos típicos de la región).</p>
+      </div>
+    </div>
+
+    <div id="s-emergencias" class="g-sec">
+      <div class="g-sec-head">🚑 Emergencias</div>
+      <div class="g-contact-green">
+        <div style="font-size:13px;font-weight:800;color:#065F46;margin-bottom:0.5rem">Contacto principal de la finca</div>
+        <div style="font-size:15px;font-weight:700;color:#047857;margin-bottom:0.25rem">📞 311 388 7061</div>
+        <div style="font-size:12px;color:#059669">Llamadas y WhatsApp · Ante cualquier situación, comunícate con nosotros primero.</div>
+      </div>
+      <div class="g-sec-head">Hospitales más cercanos</div>
+      <div class="g-em-card">
+        <div class="g-em-name">Hospital Gonzalo Contreras E.S.E. — Toro</div>
+        <p>Centro médico más cercano, a 2 minutos de la finca.</p>
+        <div style="margin-top:0.5rem;font-size:13px;font-weight:700;color:#991B1B">📞 Urgencias: +57 317 383 0078</div>
+      </div>
+      <div class="g-em-card">
+        <div class="g-em-name">Hospital Sagrada Familia E.S.E. — La Unión</div>
+        <p>Hospital de mayor capacidad, a 8 minutos de la villa.</p>
+      </div>
+      <div class="g-sec-head" style="margin-top:1.5rem">Estación de Policía — Toro</div>
+      <div class="g-em-card">
+        <div class="g-pol-row"><span class="g-pol-name">Comando Toro</span><span class="g-pol-num">602 221 0996</span></div>
+        <div class="g-pol-row"><span class="g-pol-name">Cuadrante Toro</span><span class="g-pol-num">317 260 4418</span></div>
+        <div class="g-pol-row" style="border-bottom:none"><span class="g-pol-name">Tránsito y Transporte</span><span class="g-pol-num">323 227 5046</span></div>
+      </div>
+      <div class="g-sec-head" style="margin-top:0.5rem">Bomberos Voluntarios — Toro</div>
+      <div class="g-em-card">
+        <div class="g-pol-row"><span class="g-pol-name">Oficina · Calle 9 No. 2-09</span><span class="g-pol-num">312 224 3750</span></div>
+        <div class="g-pol-row" style="border-bottom:none"><span class="g-pol-name">Oficina 1</span><span class="g-pol-num">316 641 3235</span></div>
+      </div>
+      <div class="g-sec-head" style="margin-top:0.5rem">Líneas nacionales de emergencia</div>
+      <div class="g-em-grid">
+        <div class="g-em-pill"><div style="font-size:10px;font-weight:800;color:#991B1B;text-transform:uppercase;letter-spacing:0.8px">Policía</div><div class="g-em-num">123</div></div>
+        <div class="g-em-pill"><div style="font-size:10px;font-weight:800;color:#991B1B;text-transform:uppercase;letter-spacing:0.8px">Cruz Roja</div><div class="g-em-num">132</div></div>
+        <div class="g-em-pill"><div style="font-size:10px;font-weight:800;color:#991B1B;text-transform:uppercase;letter-spacing:0.8px">Bomberos</div><div class="g-em-num">119</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="g-footer">
+    Finca Villa Gómez · La Unión, Valle del Cauca<br>
+    <a href="https://linktr.ee/FincaVillaGomez" target="_blank">linktr.ee/FincaVillaGomez</a> · 311 388 7061
+  </div>
+</div>
+
+<script>
+function gTab(id,btn){
+  document.querySelectorAll('.g-sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.g-nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('s-'+id).classList.add('on');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
