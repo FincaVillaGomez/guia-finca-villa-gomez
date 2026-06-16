@@ -10,7 +10,11 @@
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:#E0F7FA;display:flex;justify-content:center;min-height:100vh;padding:0}
   .g-root{font-family:'Nunito',sans-serif;background:#F0FBFC;max-width:680px;width:100%;color:#1A3A40;min-height:100vh}
-  .g-hero{background:#0E7490;padding:2.5rem 2rem 2rem;text-align:center}
+  .g-hero{background:#0E7490;padding:2.5rem 2rem 2rem;text-align:center;position:relative}
+  .g-lang{position:absolute;top:1rem;right:1rem;display:flex;gap:6px}
+  .g-lang button{background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.4);color:#fff;font-family:'Nunito',sans-serif;font-size:11px;font-weight:800;padding:4px 10px;border-radius:20px;cursor:pointer;letter-spacing:0.5px;transition:all 0.2s}
+  .g-lang button.active{background:#fff;color:#0E7490}
+  .g-lang button:hover{background:rgba(255,255,255,0.3)}
   .g-hero-emoji{font-size:48px;display:block;margin-bottom:0.5rem}
   .g-hero-eyebrow{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#A5F3FC;font-weight:700;margin-bottom:0.5rem}
   .g-hero-title{font-family:'Playfair Display',serif;font-size:30px;color:#fff;margin:0 0 0.4rem;line-height:1.2}
@@ -30,7 +34,6 @@
   .g-card.coral::before{background:#F97316}
   .g-card.teal::before{background:#14B8A6}
   .g-card.amber::before{background:#F59E0B}
-  .g-card.purple::before{background:#8B5CF6}
   .g-card-name{font-size:15px;font-weight:800;color:#0C4A6E;margin:0 0 0.25rem}
   .g-tag{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;padding:3px 9px;border-radius:20px;margin-bottom:0.4rem}
   .g-tag.turquesa{background:#CFFAFE;color:#0E7490}
@@ -66,224 +69,306 @@
   .g-footer{background:#0C4A6E;color:#BAE6FD;text-align:center;padding:1.25rem;font-size:12px;font-weight:600;line-height:1.8}
   .g-footer a{color:#7DD3FC;text-decoration:none}
   .g-contact-green{background:#ECFDF5;border:1.5px solid #A7F3D0;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.25rem}
+  [data-lang]{display:none}
+  [data-lang].show{display:block}
+  span[data-lang]{display:none}
+  span[data-lang].show{display:inline}
 </style>
 </head>
 <body>
 <div class="g-root">
   <div class="g-hero">
+    <div class="g-lang">
+      <button id="btn-es" class="active" onclick="setLang('es')">ES</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
     <span class="g-hero-emoji">🌴</span>
     <div class="g-hero-eyebrow">La Unión · Valle del Cauca</div>
-    <div class="g-hero-title">Guía de Finca Villa Gómez</div>
-    <div class="g-hero-sub">Todo lo que necesitas saber para vivir el norte del Valle</div>
+    <div class="g-hero-title">
+      <span data-lang="es">Guía de Finca Villa Gómez</span>
+      <span data-lang="en">Finca Villa Gómez Guide</span>
+    </div>
+    <div class="g-hero-sub">
+      <span data-lang="es">Todo lo que necesitas saber para vivir el norte del Valle</span>
+      <span data-lang="en">Everything you need to know to enjoy northern Valle del Cauca</span>
+    </div>
     <svg class="g-hero-wave" viewBox="0 0 680 32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,16 C170,32 510,0 680,16 L680,32 L0,32 Z" fill="#F0FBFC"/></svg>
   </div>
 
   <div class="g-nav" role="tablist">
-    <button class="active" onclick="gTab('inicio',this)">🏠 Inicio</button>
-    <button onclick="gTab('lugares',this)">🗺️ Lugares</button>
-    <button onclick="gTab('gastro',this)">🍽️ Gastronomía</button>
-    <button onclick="gTab('aventura',this)">🪂 Aventura</button>
-    <button onclick="gTab('compras',this)">🛒 Compras</button>
-    <button onclick="gTab('emergencias',this)">🚑 Emergencias</button>
+    <button class="active" onclick="gTab('inicio',this)"><span data-lang="es">🏠 Inicio</span><span data-lang="en">🏠 Home</span></button>
+    <button onclick="gTab('lugares',this)"><span data-lang="es">🗺️ Lugares</span><span data-lang="en">🗺️ Places</span></button>
+    <button onclick="gTab('gastro',this)"><span data-lang="es">🍽️ Gastronomía</span><span data-lang="en">🍽️ Food</span></button>
+    <button onclick="gTab('aventura',this)"><span data-lang="es">🪂 Aventura</span><span data-lang="en">🪂 Adventure</span></button>
+    <button onclick="gTab('compras',this)"><span data-lang="es">🛒 Compras</span><span data-lang="en">🛒 Shopping</span></button>
+    <button onclick="gTab('emergencias',this)"><span data-lang="es">🚑 Emergencias</span><span data-lang="en">🚑 Emergencies</span></button>
   </div>
 
   <div class="g-body">
 
+    <!-- INICIO -->
     <div id="s-inicio" class="g-sec on">
       <div class="g-welcome">
-        <div class="g-welcome-title">¡Bienvenidos a su casa! 🎉</div>
-        <p>Nos alegra mucho tenerlos aquí. Esta guía fue hecha con cariño para que descubran todo lo que el norte del Valle del Cauca tiene para ofrecer. Cualquier duda, estamos a un mensaje.</p>
+        <div class="g-welcome-title">
+          <span data-lang="es">¡Bienvenidos a su casa! 🎉</span>
+          <span data-lang="en">Welcome to your home! 🎉</span>
+        </div>
+        <p>
+          <span data-lang="es">Nos alegra mucho tenerlos aquí. Esta guía fue hecha con cariño para que descubran todo lo que el norte del Valle del Cauca tiene para ofrecer. Cualquier duda, estamos a un mensaje.</span>
+          <span data-lang="en">We're so glad to have you here. This guide was made with care so you can discover everything the north of Valle del Cauca has to offer. Any questions, just send us a message.</span>
+        </p>
       </div>
-      <div class="g-sec-head">📍 La finca</div>
-      <div class="g-row"><div class="g-row-icon">📍</div><div><div class="g-row-label">Dirección</div><div class="g-row-val">Vía Panorama, Toro, Valle del Cauca</div></div></div>
-      <div class="g-row"><div class="g-row-icon">🏙️</div><div><div class="g-row-label">A cuánto estamos</div><div class="g-row-val">2 min de Toro · 8 min de La Unión</div></div></div>
-      <div class="g-row"><div class="g-row-icon">🚗</div><div><div class="g-row-label">Acceso</div><div class="g-row-val">Vía 100% pavimentada, todo tipo de vehículo</div></div></div>
-      <div class="g-row"><div class="g-row-icon">📞</div><div><div class="g-row-label">Contacto</div><div class="g-row-val">311 388 7061 · Llamadas y WhatsApp</div></div></div>
-      <div class="g-row"><div class="g-row-icon">🛵</div><div><div class="g-row-label">Domicilios</div><div class="g-row-val">Supermercado Eliceo · 321 730 0969 · 311 348 0595</div></div></div>
-      <div class="g-sec-head" style="margin-top:1.5rem">✨ Lo que tienen disponible</div>
+      <div class="g-sec-head">
+        <span data-lang="es">📍 La finca</span>
+        <span data-lang="en">📍 The property</span>
+      </div>
+      <div class="g-row"><div class="g-row-icon">📍</div><div>
+        <div class="g-row-label"><span data-lang="es">Dirección</span><span data-lang="en">Address</span></div>
+        <div class="g-row-val">Vía Panorama, Toro, Valle del Cauca</div>
+      </div></div>
+      <div class="g-row"><div class="g-row-icon">🏙️</div><div>
+        <div class="g-row-label"><span data-lang="es">A cuánto estamos</span><span data-lang="en">Distance</span></div>
+        <div class="g-row-val"><span data-lang="es">2 min de Toro · 8 min de La Unión</span><span data-lang="en">2 min from Toro · 8 min from La Unión</span></div>
+      </div></div>
+      <div class="g-row"><div class="g-row-icon">🚗</div><div>
+        <div class="g-row-label"><span data-lang="es">Acceso</span><span data-lang="en">Access</span></div>
+        <div class="g-row-val"><span data-lang="es">Vía 100% pavimentada, todo tipo de vehículo</span><span data-lang="en">100% paved road, all vehicle types</span></div>
+      </div></div>
+      <div class="g-row"><div class="g-row-icon">📞</div><div>
+        <div class="g-row-label"><span data-lang="es">Contacto</span><span data-lang="en">Contact</span></div>
+        <div class="g-row-val">311 388 7061 · <span data-lang="es">Llamadas y WhatsApp</span><span data-lang="en">Calls & WhatsApp</span></div>
+      </div></div>
+      <div class="g-row"><div class="g-row-icon">🛵</div><div>
+        <div class="g-row-label"><span data-lang="es">Domicilios</span><span data-lang="en">Deliveries</span></div>
+        <div class="g-row-val">Supermercado Eliceo · 321 730 0969 · 311 348 0595</div>
+      </div></div>
+      <div class="g-sec-head" style="margin-top:1.5rem">
+        <span data-lang="es">✨ Lo que tienen disponible</span>
+        <span data-lang="en">✨ What's available</span>
+      </div>
       <div class="g-pills">
-        <span class="g-pill">🏊 Piscina con cascada</span><span class="g-pill">🍖 Estación BBQ</span><span class="g-pill">🔊 JBL PartyBox</span><span class="g-pill">🎮 Sala de juegos</span><span class="g-pill">🏕️ Zona camping</span><span class="g-pill">🐾 Pet-friendly</span><span class="g-pill">🚗 Parqueadero</span><span class="g-pill">📶 Wi-Fi</span><span class="g-pill">🔥 Fogata</span>
+        <span class="g-pill"><span data-lang="es">🏊 Piscina con cascada</span><span data-lang="en">🏊 Pool with waterfall</span></span>
+        <span class="g-pill"><span data-lang="es">🍖 Estación BBQ</span><span data-lang="en">🍖 BBQ station</span></span>
+        <span class="g-pill">🔊 JBL PartyBox</span>
+        <span class="g-pill"><span data-lang="es">🎮 Sala de juegos</span><span data-lang="en">🎮 Game room</span></span>
+        <span class="g-pill"><span data-lang="es">🏕️ Zona camping</span><span data-lang="en">🏕️ Camping area</span></span>
+        <span class="g-pill">🐾 Pet-friendly</span>
+        <span class="g-pill"><span data-lang="es">🚗 Parqueadero</span><span data-lang="en">🚗 Parking</span></span>
+        <span class="g-pill">📶 Wi-Fi</span>
+        <span class="g-pill"><span data-lang="es">🔥 Fogata</span><span data-lang="en">🔥 Bonfire</span></span>
       </div>
-      <a class="g-cta" href="https://linktr.ee/FincaVillaGomez" target="_blank">Todos nuestros links → linktr.ee/FincaVillaGomez</a>
+      <a class="g-cta" href="https://linktr.ee/FincaVillaGomez" target="_blank">
+        <span data-lang="es">Todos nuestros links → linktr.ee/FincaVillaGomez</span>
+        <span data-lang="en">All our links → linktr.ee/FincaVillaGomez</span>
+      </a>
     </div>
 
+    <!-- LUGARES -->
     <div id="s-lugares" class="g-sec">
-      <div class="g-sec-head">🗺️ Lugares de interés</div>
+      <div class="g-sec-head"><span data-lang="es">🗺️ Lugares de interés</span><span data-lang="en">🗺️ Places of interest</span></div>
+
       <div class="g-card">
-        <span class="g-tag turquesa">⭐ Imperdible</span>
-        <div class="g-card-name">Parque Nacional de la Uva y el Vino</div>
-        <p>El atractivo más emblemático de La Unión. Viñedos, zoológico, jardín zen, museo de la vid y degustación de vinos Casa Grajales. Ideal para medio día en familia.</p>
-        <div class="g-tip">💡 Verificar tarifas y horarios en parquenacionaldelauva.com o al 320 632 1021 antes de ir.</div>
+        <span class="g-tag turquesa"><span data-lang="es">⭐ Imperdible</span><span data-lang="en">⭐ Must-see</span></span>
+        <div class="g-card-name"><span data-lang="es">Parque Nacional de la Uva y el Vino</span><span data-lang="en">National Park of Grape and Wine</span></div>
+        <p><span data-lang="es">El atractivo más emblemático de La Unión. Viñedos, zoológico, jardín zen, museo de la vid y degustación de vinos Casa Grajales. Ideal para medio día en familia.</span><span data-lang="en">The most iconic attraction in La Unión. Vineyards, zoo, zen garden, wine museum and Casa Grajales wine tasting. Perfect for a family half-day trip.</span></p>
+        <div class="g-tip"><span data-lang="es">💡 Verificar tarifas y horarios en parquenacionaldelauva.com o al 320 632 1021 antes de ir.</span><span data-lang="en">💡 Check prices and hours at parquenacionaldelauva.com or call 320 632 1021 before visiting.</span></div>
       </div>
+
       <div class="g-card teal">
-        <span class="g-tag verde">Cultural</span>
-        <div class="g-card-name">Parque Principal Argemiro Escobar — La Unión</div>
-        <p>El corazón del municipio. Arquitectura colonial, iglesia principal y el mejor lugar para probar un auténtico cholado vallecaucano con frutas frescas de la zona.</p>
+        <span class="g-tag verde"><span data-lang="es">Cultural</span><span data-lang="en">Cultural</span></span>
+        <div class="g-card-name"><span data-lang="es">Parque Principal Argemiro Escobar — La Unión</span><span data-lang="en">Argemiro Escobar Main Square — La Unión</span></div>
+        <p><span data-lang="es">El corazón del municipio. Arquitectura colonial, iglesia principal y el mejor lugar para probar un auténtico cholado vallecaucano con frutas frescas de la zona.</span><span data-lang="en">The heart of the municipality. Colonial architecture, main church, and the best place to try an authentic cholado vallecaucano made with fresh local fruits.</span></p>
       </div>
+
       <div class="g-card amber">
-        <span class="g-tag naranja">Historia · 1610</span>
-        <div class="g-card-name">Capilla Doctrinera San Juan Bautista — Toro</div>
-        <p>Monumento nacional construido en 1610 a orillas del río Cauca. Conserva nichos de madera, ornamentos, púlpito, misales en latín e imágenes originales. Uno de los restos arquitectónicos coloniales más antiguos del norte del Valle.</p>
+        <span class="g-tag naranja"><span data-lang="es">Historia · 1610</span><span data-lang="en">History · 1610</span></span>
+        <div class="g-card-name"><span data-lang="es">Capilla Doctrinera San Juan Bautista — Toro</span><span data-lang="en">San Juan Bautista Doctrine Chapel — Toro</span></div>
+        <p><span data-lang="es">Monumento nacional construido en 1610 a orillas del río Cauca. Conserva nichos de madera, ornamentos, púlpito, misales en latín e imágenes originales. Uno de los restos arquitectónicos coloniales más antiguos del norte del Valle.</span><span data-lang="en">National monument built in 1610 on the banks of the Cauca River. It preserves original wooden niches, ornaments, pulpit, Latin missals, and images. One of the oldest colonial structures in northern Valle del Cauca.</span></p>
       </div>
+
       <div class="g-card teal">
-        <span class="g-tag verde">Panorámica</span>
-        <div class="g-card-name">Cerro de la Cruz — Toro</div>
-        <p>Referente espiritual y lugar de peregrinación. Vista panorámica privilegiada del territorio desde las alturas del municipio.</p>
+        <span class="g-tag verde"><span data-lang="es">Panorámica</span><span data-lang="en">Scenic viewpoint</span></span>
+        <div class="g-card-name"><span data-lang="es">Cerro de la Cruz — Toro</span><span data-lang="en">Cerro de la Cruz — Toro</span></div>
+        <p><span data-lang="es">Referente espiritual y lugar de peregrinación. Vista panorámica privilegiada del territorio desde las alturas del municipio.</span><span data-lang="en">Spiritual landmark and pilgrimage site. Offers a stunning panoramic view of the surrounding territory from the heights of the municipality.</span></p>
       </div>
+
       <div class="g-card">
-        <span class="g-tag turquesa">Hotel · Restaurante</span>
+        <span class="g-tag turquesa"><span data-lang="es">Hotel · Restaurante</span><span data-lang="en">Hotel · Restaurant</span></span>
         <div class="g-card-name">Hotel Los Viñedos — La Unión</div>
-        <p>La mejor vista panorámica de La Unión y el Valle. Dos restaurantes de alto nivel para una cena especial o almuerzo memorable.</p>
-        <div class="g-link-row"><a class="g-link" href="https://maps.app.goo.gl/tyVcon4tGZ6hJ5oZ9" target="_blank">📍 Ver en Google Maps</a></div>
+        <p><span data-lang="es">La mejor vista panorámica de La Unión y el Valle. Dos restaurantes de alto nivel para una cena especial o almuerzo memorable.</span><span data-lang="en">The best panoramic view of La Unión and the valley. Two upscale restaurants perfect for a special dinner or memorable lunch.</span></p>
+        <div class="g-link-row"><a class="g-link" href="https://maps.app.goo.gl/tyVcon4tGZ6hJ5oZ9" target="_blank">📍 Google Maps</a></div>
       </div>
     </div>
 
+    <!-- GASTRONOMIA -->
     <div id="s-gastro" class="g-sec">
-      <div class="g-sec-head">🍽️ Gastronomía local</div>
+      <div class="g-sec-head"><span data-lang="es">🍽️ Gastronomía local</span><span data-lang="en">🍽️ Local food & dining</span></div>
+
       <div class="g-card coral">
-        <span class="g-tag naranja">🌅 Vista panorámica</span>
+        <span class="g-tag naranja"><span data-lang="es">🌅 Vista panorámica</span><span data-lang="en">🌅 Panoramic view</span></span>
         <div class="g-card-name">Rosalia's Garden</div>
-        <p>Espacio gastronómico con una de las mejores vistas de la región. Ambiente moderno y acogedor. Perfecto para el atardecer.</p>
-        <div class="g-tip">💡 Para grupos grandes, reservar con anticipación.</div>
+        <p><span data-lang="es">Espacio gastronómico con una de las mejores vistas de la región. Ambiente moderno y acogedor. Perfecto para el atardecer.</span><span data-lang="en">Restaurant with one of the best views in the region. Modern and welcoming atmosphere. Perfect for sunset.</span></p>
+        <div class="g-tip"><span data-lang="es">💡 Para grupos grandes, reservar con anticipación.</span><span data-lang="en">💡 For large groups, book in advance.</span></div>
         <div class="g-link-row">
           <a class="g-link naranja" href="https://maps.app.goo.gl/NeAmMvjmeptovrie8" target="_blank">📍 Google Maps</a>
           <a class="g-link naranja" href="tel:+573206174808">📞 320 617 4808</a>
           <a class="g-link ig" href="https://www.instagram.com/rosaliasgarden?igsh=MTZ6OTdyOWYyM2h2NA==" target="_blank">📲 @rosaliasgarden</a>
         </div>
       </div>
+
       <div class="g-card coral">
-        <span class="g-tag naranja">🍷 Restaurante premium</span>
+        <span class="g-tag naranja"><span data-lang="es">🍷 Restaurante premium</span><span data-lang="en">🍷 Premium restaurant</span></span>
         <div class="g-card-name">Hotel Los Viñedos — Trattoria & La Viña</div>
-        <p>La mejor vista panorámica de La Unión y el Valle. Dos restaurantes de alto nivel para una cena especial o almuerzo memorable.</p>
+        <p><span data-lang="es">La mejor vista panorámica de La Unión y el Valle. Dos restaurantes de alto nivel para una cena especial o almuerzo memorable.</span><span data-lang="en">The best panoramic view of La Unión and the valley. Two upscale restaurants for a special dinner or memorable lunch.</span></p>
         <div class="g-link-row"><a class="g-link naranja" href="https://maps.app.goo.gl/tyVcon4tGZ6hJ5oZ9" target="_blank">📍 Google Maps</a></div>
       </div>
+
       <div class="g-card coral">
-        <span class="g-tag rosa">☕ Café · Restaurante</span>
+        <span class="g-tag rosa"><span data-lang="es">☕ Café · Restaurante</span><span data-lang="en">☕ Café · Restaurant</span></span>
         <div class="g-card-name">Rosé Café-Restaurante</div>
-        <p>Café-restaurante local con ambiente acogedor en La Unión. Ideal para desayunos, almuerzos o un café de tarde.</p>
+        <p><span data-lang="es">Café-restaurante local con ambiente acogedor en La Unión. Ideal para desayunos, almuerzos o un café de tarde.</span><span data-lang="en">Local café-restaurant with a cozy atmosphere in La Unión. Great for breakfast, lunch, or an afternoon coffee.</span></p>
         <div class="g-link-row"><a class="g-link ig" href="https://www.instagram.com/roselaunionvalle?igsh=Y3B0d29meHBjdXh5" target="_blank">📲 @roselaunionvalle</a></div>
       </div>
+
       <div class="g-card coral">
-        <span class="g-tag naranja">🍔 Comida</span>
+        <span class="g-tag naranja"><span data-lang="es">🍔 Comida</span><span data-lang="en">🍔 Food</span></span>
         <div class="g-card-name">Yo Soy Mister</div>
-        <p>Restaurante local en La Unión. Buena opción para un plan casual con el grupo.</p>
+        <p><span data-lang="es">Restaurante local en La Unión. Buena opción para un plan casual con el grupo.</span><span data-lang="en">Local restaurant in La Unión. A great option for a casual outing with the group.</span></p>
         <div class="g-link-row"><a class="g-link ig" href="https://www.instagram.com/yosoymisterlaunion?igsh=MTFyM3MyeGxqNDBzdw==" target="_blank">📲 @yosoymisterlaunion</a></div>
       </div>
+
       <div class="g-card coral">
-        <span class="g-tag turquesa">🦞 Comida de mar</span>
+        <span class="g-tag turquesa"><span data-lang="es">🦞 Comida de mar</span><span data-lang="en">🦞 Seafood</span></span>
         <div class="g-card-name">AltaMar</div>
-        <p>Restaurante especializado en comida de mar en La Unión. Para los amantes del pescado y los mariscos.</p>
+        <p><span data-lang="es">Restaurante especializado en comida de mar en La Unión. Para los amantes del pescado y los mariscos.</span><span data-lang="en">Seafood restaurant in La Unión. Perfect for fish and shellfish lovers.</span></p>
         <div class="g-link-row"><a class="g-link ig" href="https://www.instagram.com/altamar_la_union?igsh=MTB4MnBycXJxbDhtYw==" target="_blank">📲 @altamar_la_union</a></div>
       </div>
+
       <div class="g-card amber">
-        <span class="g-tag naranja">🥩 Lechonería</span>
-        <div class="g-card-name">Lechonería Aquí es Raúl</div>
-        <p>Lechonería tradicional en La Unión. La opción ideal para los amantes de la lechona vallecaucana.</p>
+        <span class="g-tag naranja"><span data-lang="es">🥩 Lechonería</span><span data-lang="en">🥩 Roasted pork</span></span>
+        <div class="g-card-name"><span data-lang="es">Lechonería Aquí es Raúl</span><span data-lang="en">Aquí es Raúl — Roasted Pork</span></div>
+        <p><span data-lang="es">Lechonería tradicional en La Unión. La opción ideal para los amantes de la lechona vallecaucana.</span><span data-lang="en">Traditional roasted pork restaurant in La Unión. The go-to spot for lovers of the classic Valle del Cauca lechona.</span></p>
         <div class="g-link-row"><a class="g-link naranja" href="https://maps.app.goo.gl/HD24iW2kjt2HJ4mU6" target="_blank">📍 Google Maps</a></div>
       </div>
+
       <div class="g-card amber">
-        <span class="g-tag naranja">🍲 Cocina valluna</span>
+        <span class="g-tag naranja"><span data-lang="es">🍲 Cocina valluna</span><span data-lang="en">🍲 Local cuisine</span></span>
         <div class="g-card-name">La Sazón Valluna</div>
-        <p>Restaurante de cocina vallecaucana tradicional. Ideal para disfrutar de los sabores auténticos de la región.</p>
+        <p><span data-lang="es">Restaurante de cocina vallecaucana tradicional. Ideal para disfrutar de los sabores auténticos de la región.</span><span data-lang="en">Traditional Valle del Cauca cuisine restaurant. Perfect for experiencing the authentic flavors of the region.</span></p>
         <div class="g-link-row">
           <a class="g-link naranja" href="https://maps.app.goo.gl/LCo5nWn36JpMtWRb9" target="_blank">📍 Google Maps</a>
           <a class="g-link naranja" href="tel:+573135484659">📞 313 548 4659</a>
         </div>
       </div>
+
       <div class="g-card amber">
-        <span class="g-tag naranja">☕ Tradición</span>
-        <div class="g-card-name">San Luis — El pandeyuca de la región</div>
-        <p>Parada obligatoria para el desayuno o el algo. El pandeyuca más auténtico del norte del Valle.</p>
+        <span class="g-tag naranja"><span data-lang="es">☕ Tradición</span><span data-lang="en">☕ Local tradition</span></span>
+        <div class="g-card-name"><span data-lang="es">San Luis — El pandeyuca de la región</span><span data-lang="en">San Luis — Regional pandeyuca bread</span></div>
+        <p><span data-lang="es">Parada obligatoria para el desayuno o el algo. El pandeyuca más auténtico del norte del Valle.</span><span data-lang="en">A must-stop for breakfast or a snack. The most authentic pandeyuca bread in northern Valle del Cauca.</span></p>
         <div class="g-link-row"><a class="g-link naranja" href="https://maps.app.goo.gl/Ej1kp7xVb9SgmZTV8" target="_blank">📍 Google Maps</a></div>
       </div>
+
       <div class="g-card amber">
-        <span class="g-tag naranja">🥤 Bebida típica</span>
+        <span class="g-tag naranja"><span data-lang="es">🥤 Bebida típica</span><span data-lang="en">🥤 Traditional drink</span></span>
         <div class="g-card-name">El Punto del Trabuco Don Alonso</div>
-        <p>El hogar del trabuco original: bebida tradicional y energética, parte del patrimonio gastronómico local.</p>
+        <p><span data-lang="es">El hogar del trabuco original: bebida tradicional y energética, parte del patrimonio gastronómico local.</span><span data-lang="en">Home of the original trabuco: a traditional energizing drink and part of the local gastronomic heritage.</span></p>
         <div class="g-link-row"><a class="g-link naranja" href="https://maps.app.goo.gl/EFaseSgQ5wxBKg5X6" target="_blank">📍 Google Maps</a></div>
       </div>
+
       <div class="g-card coral">
-        <span class="g-tag rosa">🍩 Tradición — Versalles</span>
-        <div class="g-card-name">Panadería La Central — Buñuelos con cintura</div>
-        <p>Los famosos buñuelos con cintura, tradicionales de Versalles, Valle del Cauca. Parada obligatoria si hacen el recorrido hacia ese municipio.</p>
+        <span class="g-tag rosa"><span data-lang="es">🍩 Tradición — Versalles</span><span data-lang="en">🍩 Tradition — Versalles</span></span>
+        <div class="g-card-name"><span data-lang="es">Panadería La Central — Buñuelos con cintura</span><span data-lang="en">La Central Bakery — Traditional buñuelos</span></div>
+        <p><span data-lang="es">Los famosos buñuelos con cintura, tradicionales de Versalles, Valle del Cauca. Parada obligatoria si hacen el recorrido hacia ese municipio.</span><span data-lang="en">The famous buñuelos con cintura, a traditional treat from Versalles, Valle del Cauca. A must-stop if you're heading that way.</span></p>
         <div class="g-link-row"><a class="g-link naranja" href="https://maps.app.goo.gl/pGRDgzjtNi8UZJa4A" target="_blank">📍 Google Maps</a></div>
       </div>
+
       <div class="g-card" style="border-left-color:#14B8A6">
-        <span class="g-tag verde">🍴 Para probar sí o sí</span>
-        <div class="g-card-name">Sabores del Valle que no pueden irse sin probar</div>
-        <p>Sancocho de gallina · Tamal valluno · Cholado vallecaucano · Aborrajado · Pandebono · Marranitas · Arequipe de uva · Champús · Guarapo · Lulada.</p>
+        <span class="g-tag verde"><span data-lang="es">🍴 Para probar sí o sí</span><span data-lang="en">🍴 Must-try flavors</span></span>
+        <div class="g-card-name"><span data-lang="es">Sabores del Valle que no pueden irse sin probar</span><span data-lang="en">Valle del Cauca flavors you can't leave without trying</span></div>
+        <p><span data-lang="es">Sancocho de gallina · Tamal valluno · Cholado vallecaucano · Aborrajado · Pandebono · Marranitas · Arequipe de uva · Champús · Guarapo · Lulada.</span><span data-lang="en">Chicken sancocho · Tamal valluno · Cholado (shaved ice) · Aborrajado (fried plantain with cheese) · Pandebono · Marranitas · Grape arequipe · Champús · Guarapo (sugarcane juice) · Lulada.</span></p>
       </div>
     </div>
 
+    <!-- AVENTURA -->
     <div id="s-aventura" class="g-sec">
-      <div class="g-sec-head">🪂 Aventura</div>
+      <div class="g-sec-head"><span data-lang="es">🪂 Aventura</span><span data-lang="en">🪂 Adventure</span></div>
       <div class="g-card">
-        <span class="g-tag lila">🪂 Deporte extremo</span>
-        <div class="g-card-name">Parapente La Unión</div>
-        <p>La Unión es uno de los epicentros del parapentismo en Colombia. Topografía y clima ideales para volar con vista al Valle del Cauca.</p>
-        <div class="g-tip">💡 Consulta disponibilidad y reservas directamente con el operador.</div>
+        <span class="g-tag lila"><span data-lang="es">🪂 Deporte extremo</span><span data-lang="en">🪂 Extreme sport</span></span>
+        <div class="g-card-name"><span data-lang="es">Parapente La Unión</span><span data-lang="en">Paragliding La Unión</span></div>
+        <p><span data-lang="es">La Unión es uno de los epicentros del parapentismo en Colombia. Topografía y clima ideales para volar con vista al Valle del Cauca.</span><span data-lang="en">La Unión is one of Colombia's top paragliding destinations. Ideal topography and climate for flying with stunning views over Valle del Cauca.</span></p>
+        <div class="g-tip"><span data-lang="es">💡 Consulta disponibilidad y reservas directamente con el operador.</span><span data-lang="en">💡 Check availability and book directly with the operator.</span></div>
         <div class="g-link-row"><a class="g-link ig" href="https://www.instagram.com/parapentelaunion?igsh=MWM3Y2pjcDBlczBmaA==" target="_blank">📲 @parapentelaunion</a></div>
       </div>
     </div>
 
+    <!-- COMPRAS -->
     <div id="s-compras" class="g-sec">
-      <div class="g-sec-head">🛒 Compras y abastecimiento</div>
+      <div class="g-sec-head"><span data-lang="es">🛒 Compras y abastecimiento</span><span data-lang="en">🛒 Shopping & supplies</span></div>
+
       <div class="g-card" style="background:#F0FBFC">
-        <span class="g-tag turquesa">🛵 Domicilio a la finca</span>
+        <span class="g-tag turquesa"><span data-lang="es">🛵 Domicilio a la finca</span><span data-lang="en">🛵 Delivery to the villa</span></span>
         <div class="g-card-name">Supermercado Eliceo</div>
-        <p>Domicilios directamente a la puerta de la villa. La opción más cómoda para abastecerse sin salir.</p>
+        <p><span data-lang="es">Domicilios directamente a la puerta de la villa. La opción más cómoda para abastecerse sin salir.</span><span data-lang="en">Deliveries directly to the villa's door. The most convenient option to stock up without leaving.</span></p>
         <div class="g-link-row">
           <a class="g-link" href="https://maps.app.goo.gl/jiWruhmGeDCrEmBAA" target="_blank">📍 Google Maps</a>
           <a class="g-link" href="tel:+573217300969">📞 321 730 0969</a>
           <a class="g-link" href="tel:+573113480595">📞 311 348 0595</a>
         </div>
       </div>
+
       <div class="g-card coral">
-        <span class="g-tag naranja">🍷 Productos regionales</span>
-        <div class="g-card-name">Casa Grajales — Vinos y productos de la uva</div>
-        <p>La empresa vitícola más reconocida de la región. Vinos, arequipe de uva y productos artesanales. Un recuerdo perfecto para llevar.</p>
+        <span class="g-tag naranja"><span data-lang="es">🍷 Productos regionales</span><span data-lang="en">🍷 Regional products</span></span>
+        <div class="g-card-name">Casa Grajales — <span data-lang="es">Vinos y productos de la uva</span><span data-lang="en">Wines & grape products</span></div>
+        <p><span data-lang="es">La empresa vitícola más reconocida de la región. Vinos, arequipe de uva y productos artesanales. Un recuerdo perfecto para llevar.</span><span data-lang="en">The most recognized winery in the region. Wines, grape arequipe, and artisanal products. A perfect souvenir to take home.</span></p>
         <div class="g-link-row"><a class="g-link naranja" href="https://maps.app.goo.gl/gWxyWqnPcVXnegJE8" target="_blank">📍 Google Maps</a></div>
       </div>
+
       <div class="g-card teal">
-        <span class="g-tag verde">🛍️ En La Unión</span>
-        <div class="g-card-name">Centros comerciales y tiendas</div>
-        <p>Centro Comercial La Viña · Centro Comercial La 15 · Casa Detalles (artesanías y regalos típicos de la región).</p>
+        <span class="g-tag verde"><span data-lang="es">🛍️ En La Unión</span><span data-lang="en">🛍️ In La Unión</span></span>
+        <div class="g-card-name"><span data-lang="es">Centros comerciales y tiendas</span><span data-lang="en">Malls & shops</span></div>
+        <p><span data-lang="es">Centro Comercial La Viña · Centro Comercial La 15 · Casa Detalles (artesanías y regalos típicos de la región).</span><span data-lang="en">Centro Comercial La Viña · Centro Comercial La 15 · Casa Detalles (local crafts and regional gifts).</span></p>
       </div>
     </div>
 
+    <!-- EMERGENCIAS -->
     <div id="s-emergencias" class="g-sec">
-      <div class="g-sec-head">🚑 Emergencias</div>
+      <div class="g-sec-head"><span data-lang="es">🚑 Emergencias</span><span data-lang="en">🚑 Emergencies</span></div>
+
       <div class="g-contact-green">
-        <div style="font-size:13px;font-weight:800;color:#065F46;margin-bottom:0.5rem">Contacto principal de la finca</div>
+        <div style="font-size:13px;font-weight:800;color:#065F46;margin-bottom:0.5rem"><span data-lang="es">Contacto principal de la finca</span><span data-lang="en">Main property contact</span></div>
         <div style="font-size:15px;font-weight:700;color:#047857;margin-bottom:0.25rem">📞 311 388 7061</div>
-        <div style="font-size:12px;color:#059669">Llamadas y WhatsApp · Ante cualquier situación, comunícate con nosotros primero.</div>
+        <div style="font-size:12px;color:#059669"><span data-lang="es">Llamadas y WhatsApp · Ante cualquier situación, comunícate con nosotros primero.</span><span data-lang="en">Calls & WhatsApp · In any situation, contact us first.</span></div>
       </div>
-      <div class="g-sec-head">Hospitales más cercanos</div>
+
+      <div class="g-sec-head"><span data-lang="es">Hospitales más cercanos</span><span data-lang="en">Nearest hospitals</span></div>
       <div class="g-em-card">
         <div class="g-em-name">Hospital Gonzalo Contreras E.S.E. — Toro</div>
-        <p>Centro médico más cercano, a 2 minutos de la finca.</p>
-        <div style="margin-top:0.5rem;font-size:13px;font-weight:700;color:#991B1B">📞 Urgencias: +57 317 383 0078</div>
+        <p><span data-lang="es">Centro médico más cercano, a 2 minutos de la finca.</span><span data-lang="en">Nearest medical center, 2 minutes from the villa.</span></p>
+        <div style="margin-top:0.5rem;font-size:13px;font-weight:700;color:#991B1B">📞 <span data-lang="es">Urgencias</span><span data-lang="en">Emergency</span>: +57 317 383 0078</div>
       </div>
       <div class="g-em-card">
         <div class="g-em-name">Hospital Sagrada Familia E.S.E. — La Unión</div>
-        <p>Hospital de mayor capacidad, a 8 minutos de la villa.</p>
+        <p><span data-lang="es">Hospital de mayor capacidad, a 8 minutos de la villa.</span><span data-lang="en">Larger hospital, 8 minutes from the villa.</span></p>
       </div>
-      <div class="g-sec-head" style="margin-top:1.5rem">Estación de Policía — Toro</div>
+
+      <div class="g-sec-head" style="margin-top:1.5rem"><span data-lang="es">Estación de Policía — Toro</span><span data-lang="en">Police Station — Toro</span></div>
       <div class="g-em-card">
         <div class="g-pol-row"><span class="g-pol-name">Comando Toro</span><span class="g-pol-num">602 221 0996</span></div>
         <div class="g-pol-row"><span class="g-pol-name">Cuadrante Toro</span><span class="g-pol-num">317 260 4418</span></div>
-        <div class="g-pol-row" style="border-bottom:none"><span class="g-pol-name">Tránsito y Transporte</span><span class="g-pol-num">323 227 5046</span></div>
+        <div class="g-pol-row" style="border-bottom:none"><span class="g-pol-name"><span data-lang="es">Tránsito y Transporte</span><span data-lang="en">Traffic & Transport</span></span><span class="g-pol-num">323 227 5046</span></div>
       </div>
-      <div class="g-sec-head" style="margin-top:0.5rem">Bomberos Voluntarios — Toro</div>
+
+      <div class="g-sec-head" style="margin-top:0.5rem"><span data-lang="es">Bomberos Voluntarios — Toro</span><span data-lang="en">Volunteer Fire Department — Toro</span></div>
       <div class="g-em-card">
-        <div class="g-pol-row"><span class="g-pol-name">Oficina · Calle 9 No. 2-09</span><span class="g-pol-num">312 224 3750</span></div>
-        <div class="g-pol-row" style="border-bottom:none"><span class="g-pol-name">Oficina 1</span><span class="g-pol-num">316 641 3235</span></div>
+        <div class="g-pol-row"><span class="g-pol-name"><span data-lang="es">Oficina · Calle 9 No. 2-09</span><span data-lang="en">Office · Calle 9 No. 2-09</span></span><span class="g-pol-num">312 224 3750</span></div>
+        <div class="g-pol-row" style="border-bottom:none"><span class="g-pol-name"><span data-lang="es">Oficina 1</span><span data-lang="en">Office 1</span></span><span class="g-pol-num">316 641 3235</span></div>
       </div>
-      <div class="g-sec-head" style="margin-top:0.5rem">Líneas nacionales de emergencia</div>
+
+      <div class="g-sec-head" style="margin-top:0.5rem"><span data-lang="es">Líneas nacionales de emergencia</span><span data-lang="en">National emergency lines</span></div>
       <div class="g-em-grid">
-        <div class="g-em-pill"><div style="font-size:10px;font-weight:800;color:#991B1B;text-transform:uppercase;letter-spacing:0.8px">Policía</div><div class="g-em-num">123</div></div>
+        <div class="g-em-pill"><div style="font-size:10px;font-weight:800;color:#991B1B;text-transform:uppercase;letter-spacing:0.8px"><span data-lang="es">Policía</span><span data-lang="en">Police</span></div><div class="g-em-num">123</div></div>
         <div class="g-em-pill"><div style="font-size:10px;font-weight:800;color:#991B1B;text-transform:uppercase;letter-spacing:0.8px">Cruz Roja</div><div class="g-em-num">132</div></div>
-        <div class="g-em-pill"><div style="font-size:10px;font-weight:800;color:#991B1B;text-transform:uppercase;letter-spacing:0.8px">Bomberos</div><div class="g-em-num">119</div></div>
+        <div class="g-em-pill"><div style="font-size:10px;font-weight:800;color:#991B1B;text-transform:uppercase;letter-spacing:0.8px"><span data-lang="es">Bomberos</span><span data-lang="en">Fire dept.</span></div><div class="g-em-num">119</div></div>
       </div>
     </div>
 
@@ -296,12 +381,26 @@
 </div>
 
 <script>
-function gTab(id,btn){
-  document.querySelectorAll('.g-sec').forEach(s=>s.classList.remove('on'));
-  document.querySelectorAll('.g-nav button').forEach(b=>b.classList.remove('active'));
-  document.getElementById('s-'+id).classList.add('on');
+let currentLang = 'es';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.classList.toggle('show', el.getAttribute('data-lang') === lang);
+  });
+  document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang;
+}
+
+function gTab(id, btn) {
+  document.querySelectorAll('.g-sec').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('.g-nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('s-' + id).classList.add('on');
   btn.classList.add('active');
 }
+
+setLang('es');
 </script>
 </body>
 </html>
